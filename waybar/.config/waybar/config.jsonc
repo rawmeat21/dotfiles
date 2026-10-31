@@ -1,0 +1,152 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 20,
+  "margin-top": 3,
+  "margin-left": 3,
+  "margin-right": 3,
+  "spacing": 4,
+
+  "modules-left": ["custom/arch", "clock", "bluetooth", "network", "niri/window"],
+  "modules-center": ["group/center"],
+  "modules-right": ["group/right"],
+
+  "custom/arch": { "format": "\uf303", "tooltip": false, "on-click": "fuzzel" },
+
+  "clock": {
+    "format": "{:%H:%M} \uf017",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": { "mode": "month", "format": { "today": "<b>{}</b>" } }
+  },
+
+
+
+
+  "network": {
+    "format-wifi": "{essid} 󰤨  {signalStrength}%",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "offline 󰤮 ",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "tooltip-format-wifi": "{ifname}  {ipaddr}\nStrength: {signalStrength}%",
+    "on-click": "kitty --class menu -e ~/.config/waybar/scripts/network"
+  },
+
+  "niri/window": {
+    "format": "{title}",
+    "max-length": 40,
+    "separate-outputs": true,
+    "rewrite": { "^$": "" }
+  },
+
+  "group/center": {
+    "orientation": "horizontal",
+    "modules": ["idle_inhibitor", "niri/workspaces", "backlight", "custom/nightlight", "pulseaudio"]
+  },
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": { "activated": "●", "deactivated": "○" },
+    "tooltip-format-activated": "Idle inhibited",
+    "tooltip-format-deactivated": "Idle allowed"
+  },
+
+  "niri/workspaces": {
+    "format": "{index}",
+    "all-outputs": false
+  },
+
+  "backlight": {
+    "format": "{percent}%",
+    "on-scroll-up": "brightnessctl set 5%+",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+
+  "custom/nightlight": {
+    "format": "\uf186",
+    "return-type": "json",
+    "exec": "pgrep -x gammastep >/dev/null && echo '{\"class\":\"on\"}' || echo '{\"class\":\"off\"}'",
+    "interval": 2,
+    "on-click": "sh -c 'pgrep -x gammastep && pkill -x gammastep || setsid gammastep -O 3500 &'",
+    "tooltip": false
+  },
+
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-muted": "\uf026",
+    "format-icons": { "default": ["\uf026", "\uf027", "\uf028"] },
+    "tooltip-format": "{desc}  {volume}%",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "pavucontrol",
+    "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+  },
+
+  "cpu": {
+    "format": "{usage}% \uf2db",
+    "interval": 2,
+    "on-click": "kitty -e htop"
+  },
+
+  "battery": {
+    "format": "{capacity}",
+    "format-charging": "{capacity}",
+    "format-plugged": "{capacity}",
+    "states": { "warning": 25, "critical": 12 },
+    "tooltip-format": "{timeTo}  ({power}W)"
+  },
+
+  "custom/notification": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "makoctl mode | grep -q do-not-disturb && echo '{\"text\":\"\\uf1f6\",\"class\":\"dnd\"}' || echo '{\"text\":\"\\uf0f3\",\"class\":\"on\"}'",
+    "interval": "once",
+    "signal": 8,
+    "on-click": "makoctl mode -t do-not-disturb; pkill -RTMIN+8 waybar",
+    "on-click-right": "makoctl restore",
+    "tooltip": false
+  },
+
+  "tray": {
+    "icon-size": 14,
+    "spacing": 8
+  },
+
+  "group/right": {
+    "orientation": "horizontal",
+    "modules": ["cpu", "memory", "custom/update", "battery", "custom/notification", "tray", "custom/power"]
+  },
+
+  "memory": {
+    "format": "RAM {used:0.1f}G",
+    "interval": 3,
+    "tooltip-format": "{used:0.1f}G / {total:0.1f}G ({percentage}%)\nSwap: {swapUsed:0.1f}G",
+    "on-click": "kitty -e htop"
+  },
+
+  "custom/update": {
+    "exec": "$HOME/.config/waybar/scripts/update module",
+    "return-type": "json",
+    "interval": 1800,
+    "signal": 1,
+    "on-click": "kitty --class menu -e $HOME/.config/waybar/scripts/update",
+    "on-click-right": "pkill -RTMIN+1 waybar"
+  },
+
+  "custom/power": {
+    "format": "\u23fb",
+    "tooltip": false,
+    "on-click": "kitty --class menu -e $HOME/.config/waybar/scripts/power"
+  },
+
+  "bluetooth": {
+    "format": "󰂯",
+    "format-connected": "󰂱 {device_alias}",
+    "format-disabled": "󰂲",
+    "format-off": "󰂲",
+    "on-click": "kitty --class menu -e ~/.config/waybar/scripts/bluetooth",
+    "tooltip": true,
+    "tooltip-format": "{controller_alias}\n{num_connections} connected"
+  },
+
+}
+

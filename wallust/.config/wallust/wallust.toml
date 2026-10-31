@@ -1,0 +1,6 @@
+[templates.fastfetch]
+template = "fastfetch-colors.jsonc"
+target = "~/.config/fastfetch/colors.jsonc"
+
+[hooks]
+wallpaper = "swaybg -i /home/rawmeat/Pictures/wall.png -m fill"

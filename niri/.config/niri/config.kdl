@@ -19,12 +19,14 @@ environment {
 
     SDL_VIDEODRIVER "wayland"
     CLUTTER_BACKEND "wayland"
+    GTK_USE_PORTAL "1"
 }
 
 // Startup
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
-spawn-at-startup "swaybg" "-i" "/home/rawmeat/Pictures/wall.png" "-m" "fill"
+spawn-at-startup "wallust" "run" "/home/rawmeat/Pictures/wall.png"
+//spawn-at-startup "swaybg" "-i" "/home/rawmeat/Pictures/wall.png" "-m" "fill"
 
 // General
 prefer-no-csd
@@ -63,7 +65,7 @@ cursor {
 
 // Layout
 layout {
-    gaps 16
+    gaps 8
     center-focused-column "on-overflow"
 
     preset-column-widths {
@@ -74,7 +76,7 @@ layout {
 
     focus-ring {
         width 2
-        active-color "#cba6f7"
+        active-color "#808080"
         inactive-color "#313244"
     }
 
@@ -88,22 +90,10 @@ animations {
     workspace-switch {
         spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
     }
-    window-open {
-        duration-ms 200
-        curve "ease-out-quad"
-    }
+    
     window-close {
         duration-ms 200
         curve "ease-out-cubic"
-    }
-    horizontal-view-movement {
-        spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
-    }
-    window-movement {
-        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
-    }
-    window-resize {
-        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
     }
     config-notification-open-close {
         spring damping-ratio=0.6 stiffness=1200 epsilon=0.001
@@ -112,9 +102,22 @@ animations {
         duration-ms 300
         curve "ease-out-quad"
     }
+    window-open {
+        spring damping-ratio=0.55 stiffness=700 epsilon=0.0001
+    }
+    window-movement {
+        spring damping-ratio=0.7 stiffness=700 epsilon=0.0001
+    }
+    window-resize {
+        spring damping-ratio=0.8 stiffness=800 epsilon=0.0001
+    }
+    horizontal-view-movement {
+        spring damping-ratio=0.8 stiffness=800 epsilon=0.0001
+    }
 }
 
 // Window Rules
+
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
@@ -149,7 +152,7 @@ window-rule {
 }
 
 window-rule {
-    geometry-corner-radius 0
+    geometry-corner-radius 8
     clip-to-geometry true
 }
 
@@ -162,9 +165,10 @@ window-rule {
 binds {
     Mod+Shift+Escape { show-hotkey-overlay; }
 
-    Mod+Return { spawn "kitty"; }
-    Mod+D      { spawn "fuzzel"; }
+    Mod+Q { spawn "kitty"; }
+    Mod+Space      { spawn "fuzzel"; }
     Mod+B      { spawn "firefox"; }
+    Mod+E { spawn "kitty" "--class" "yazi" "-e" "yazi"; }
 
     XF86AudioRaiseVolume  allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
     XF86AudioLowerVolume  allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
@@ -172,7 +176,7 @@ binds {
     XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "5%+"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }
 
-    Mod+Q { close-window; }
+    Mod+X { close-window; }
 
     Mod+H     { focus-column-left; }
     Mod+J     { focus-workspace-down; }
@@ -256,4 +260,50 @@ binds {
     Mod+Comma  { consume-window-into-column; }
     Mod+Period { expel-window-from-column; }
     Mod+R      { switch-preset-column-width; }
+}
+
+// Frosted glass behind fuzzel
+layer-rule {
+    match namespace="^launcher$"
+    geometry-corner-radius 5
+    background-effect {
+        blur true
+    }
+}
+
+// Optional: global blur strength
+blur {
+    passes 2
+    noise 0.03
+}
+
+window-rule {
+    match app-id="^kitty$|^yazi$"
+    draw-border-with-background false
+    background-effect {
+        blur true
+	xray true
+    }
+}
+
+window-rule {
+    match app-id="^menu$"
+    open-floating true
+    default-column-width { fixed 600; }
+    default-window-height { fixed 400; }
+    draw-border-with-background false
+    background-effect {
+        blur true
+    }
+}
+
+window-rule {
+    match app-id="^file_chooser$"
+    open-floating true
+    default-column-width { fixed 1000; }
+    default-window-height { fixed 650; }
+    draw-border-with-background false
+    background-effect {
+        blur true
+    }
 }

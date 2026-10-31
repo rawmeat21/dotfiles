@@ -1,0 +1,16 @@
+{
+    "logo": {
+        "color": {
+            "1": "{{ color3 }}"        // red logo
+        }
+    },
+    "display": {
+        "color": {
+            "keys": "{{ color11 }}",   // bright red
+            "title": "{{ color15 }}",  // white
+            "separator": "{{ color10 }}", // blue/teal
+            "output": "{{ color7 }}"   // soft white for the values
+        }
+    }
+    // keep the rest of your config as it was
+}

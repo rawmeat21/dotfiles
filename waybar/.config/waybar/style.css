@@ -1,0 +1,122 @@
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+  color: #d9d9d9;
+}
+
+tooltip {
+  background: rgba(18, 18, 18, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+tooltip label { color: #d9d9d9; }
+
+/* ---------- pills ---------- */
+#custom-arch,
+#clock,
+#network,
+#group-center,
+#center,
+#bluetooth,
+#right {
+  background: rgba(20, 20, 20, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 0 12px;
+}
+
+#custom-arch {
+  font-size: 16px;
+  padding: 0 10px;
+  border-radius: 14px;
+}
+
+#clock,
+#network { padding: 0 12px; }
+
+/* dimmed window title, no pill */
+#window {
+  color: #7a7a7a;
+  padding: 0 6px;
+}
+
+/* ---------- center ---------- */
+#idle_inhibitor,
+#backlight,
+#custom-nightlight,
+#pulseaudio {
+  padding: 0 7px;
+  color: #bdbdbd;
+}
+#idle_inhibitor.activated { color: #ffffff; }
+#custom-nightlight.off { color: #6a6a6a; }
+#custom-nightlight.on  { color: #f9e2af; }
+#pulseaudio.muted      { color: #6a6a6a; }
+
+/* workspace dots, active one becomes a numbered pill */
+#workspaces { margin: 0 6px; }
+
+#workspaces button {
+  margin: 13px 3px;
+  padding: 0;
+  min-width: 8px;
+  min-height: 8px;
+  border-radius: 99px;
+  background: #4a4a4a;
+  color: transparent;
+  font-size: 0;
+  transition: all 0.2s ease;
+}
+#workspaces button:hover { background: #8a8a8a; }
+
+#workspaces button.active {
+  margin: 8px 3px;
+  min-width: 28px;
+  min-height: 18px;
+  background: #e6e6e6;
+  color: #111111;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ---------- right ---------- */
+#cpu,
+#custom-notification,
+#tray {
+  padding: 0 7px;
+  color: #bdbdbd;
+}
+
+#custom-notification.dnd { color: #6a6a6a; }
+
+#battery {
+  margin: 6px 4px;
+  padding: 0 9px;
+  border-radius: 99px;
+  background: #a6e3a1;
+  color: #111111;
+  font-weight: 700;
+}
+#battery.warning:not(.charging)  { background: #f9e2af; }
+#battery.critical:not(.charging) { background: #f38ba8; }
+#battery.charging, #battery.plugged { background: #a6e3a1; }
+
+#cpu,
+#memory,
+#custom-update,
+#custom-power,
+#custom-notification,
+#tray {
+  padding: 0 7px;
+  color: #bdbdbd;
+}
+
+#custom-power:hover { color: #b87272; }

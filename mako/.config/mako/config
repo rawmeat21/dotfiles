@@ -1,0 +1,116 @@
+max-history=5
+markup=1
+actions=1
+history=1
+sort=+time
+
+# [ BINDING OPTIONS ]
+on-button-left=invoke-default-action
+on-button-middle=dismiss-group
+on-button-right=dismiss
+on-touch=invoke-default-action
+
+# [ STYLE OPTIONS ]
+font=JetBrainsMono Nerd Font 10
+background-color=#000000cc
+text-color=#d0d0d0
+progress-color=over #808080
+
+width=320
+height=240
+
+margin=10
+outer-margin=0
+padding=16
+
+border-color=#808080
+border-size=2
+border-radius=5
+
+icons=1
+max-icon-size=48
+icon-location=left
+
+format=<b>%s</b>\n%b
+text-alignment=left
+max-visible=5
+layer=overlay
+anchor=top-right
+
+default-timeout=6000
+ignore-timeout=1
+
+# Volume / brightness / mic popups
+[app-name=Volume]
+anchor=bottom-center
+text-alignment=center
+width=200
+height=60
+border-size=2
+border-color=#808080
+background-color=#000000cc
+text-color=#f0f0f0
+progress-color=over #808080
+outer-margin=0,0,30,0
+padding=8
+default-timeout=1000
+format=<b>%s</b>
+
+[app-name="Volume Mute"]
+anchor=bottom-center
+text-alignment=center
+width=200
+height=60
+border-size=2
+border-color=#9c5a5a
+background-color=#000000cc
+text-color=#f0f0f0
+outer-margin=0,0,30,0
+padding=8
+default-timeout=1000
+format=<b>%s</b>
+
+[app-name=Microphone]
+anchor=bottom-center
+text-alignment=center
+width=200
+height=60
+border-size=2
+border-color=#808080
+background-color=#000000cc
+text-color=#f0f0f0
+progress-color=over #6f8a6f
+outer-margin=0,0,30,0
+padding=8
+default-timeout=1000
+format=<b>%s</b>
+
+[app-name=Brightness]
+anchor=bottom-center
+text-alignment=center
+width=200
+height=60
+border-size=2
+border-color=#808080
+background-color=#000000cc
+text-color=#f0f0f0
+progress-color=over #a89a6a
+outer-margin=0,0,30,0
+padding=8
+default-timeout=1000
+format=<b>%s</b>
+
+[app-name="spotify-player"]
+max-icon-size=128
+
+[app-name="Music Player"]
+text-alignment=center
+
+[urgency=critical]
+border-color=#b87272
+background-color=#000000cc
+text-color=#f0f0f0
+default-timeout=0
+
+[hidden=true]
+invisible=1

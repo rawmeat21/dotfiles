@@ -1,0 +1,60 @@
+add_newline = true
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$cmd_duration\
+$line_break\
+$character"""
+
+[directory]
+style = "#b3b3b3"
+truncation_length = 3
+
+[git_branch]
+style = "#808080"
+
+[git_status]
+style = "#b87272"
+
+[cmd_duration]
+min_time = 2000
+style = "#a89a6a"
+
+[character]
+success_symbol = "[❯](#808080)"
+error_symbol = "[❯](#b87272)"
+
+# Language modules: no symbols, dimmed versions
+[java]
+symbol = ""
+style = "#707070"
+
+[nodejs]
+symbol = ""
+style = "#707070"
+
+[python]
+symbol = ""
+style = "#707070"
+
+[rust]
+symbol = ""
+style = "#707070"
+
+[golang]
+symbol = ""
+style = "#707070"
+
+[c]
+symbol = ""
+style = "#707070"
+
+[package]
+symbol = ""
+style = "#707070"
+
+[docker_context]
+symbol = ""
+style = "#707070"
